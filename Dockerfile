@@ -15,4 +15,7 @@ RUN apt-get update && apt-get install curl gnupg -y \
 # Install your app here...
 COPY ["package.json", "package-lock.json*", "app.js"]
 RUN npm install
+
+COPY . .
+
 CMD [ "node", "app.js" ]
