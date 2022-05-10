@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const browser = puppeteer.launch({
-    executablePath: '/usr/bin/chromium-browser',
+    executablePath: '/usr/bin/google-chrome',
     args: ["--no-sandbox"]
 });
 
