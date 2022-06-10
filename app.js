@@ -5,12 +5,12 @@ const puppeteer = require('puppeteer');
 const app = express();
 app.use(bodyParser.json());
 
-const browser = puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
-    args: ["--no-sandbox"]
-});
-
 app.post('/pdf', (req, res) => {
+    const browser = puppeteer.launch({
+        executablePath: '/usr/bin/google-chrome',
+        args: ["--no-sandbox"]
+    });
+    
     console.log(req.body.url);
 
     (async () => {
@@ -29,6 +29,10 @@ app.post('/pdf', (req, res) => {
 
         res.attachment('booking.pdf');
         pdfStream.pipe(res);
+        
+        pdfStream.on('end', async () => {
+            await browser.close();
+        });
     })();
 });
 
