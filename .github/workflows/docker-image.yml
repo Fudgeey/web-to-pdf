@@ -22,5 +22,7 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
     - uses: docker/build-push-action@v3
       with:
+          context: .
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/fudgeey/web-to-pdf:latest
