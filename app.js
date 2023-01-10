@@ -6,7 +6,11 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.json());
 
+console.log('Web-to-pdf | Starting');
+
 app.post('/pdf', (req, res) => {
+    console.log(`Web-to-pdf | PDF generating for ${req.body.url}`);
+    
     (async () => {
         const browser = await puppeteer.launch({
             executablePath: '/usr/bin/google-chrome',
@@ -38,5 +42,5 @@ app.post('/pdf', (req, res) => {
 });
 
 app.listen(6000, () => {
-    console.log('Now listening on port 6000.')
+    console.log('Web-to-pdf | Server is now listening on port 6000.')
 })
